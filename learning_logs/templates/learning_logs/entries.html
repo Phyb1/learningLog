@@ -1,0 +1,9 @@
+{% extends "learning_logs/base.html" %}
+{% block content %}
+<p>Entries</p>
+<ul>
+    {% for entry in entries %}
+    <li>{{entry}}</li>
+</ul>
+<a href="{% url 'learning_logs:new-entry' %}">Add new Entry</a>
+{% endblock content %}

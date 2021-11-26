@@ -1,0 +1,71 @@
+{% load bootstrap4 %}
+<!--loading template tags in django-bootrstarp4-->
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Learning Log</title>
+    {% bootstrap_css %}
+    <!--using bootstrap styles template-->
+    {% bootstrap_javascript jquery='full' %}
+    <!--using bootstrap scripts template-->
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+        <!--everything in nav is styled according to the class selectors mb-4 is short for margin-bottom 4 this ensures that a little space appear btwn the nav bar and the rest of the page the border selector provides a thin border arounf the light background to set ot off a little from the page-->
+        <a class="navbar_brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+        <!--nav-brand styles the link so that its at the far left its a way of branding-->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="fasle" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!--this button appears if the window is too narrow for the nav list to be fully displayed clicking the button will cause the nav-list to appear as a drop down list the collapse reference causes the nav bar to collapse when the user shrinks the browser window or on mobile devices-->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <!--mr-auto is for margin-right:auto-->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'learning_logs:topics' %}">Topics</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <!--margin-left:auto  items are put to the left of the screen-->
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text" }">Hello, {{user.username}}.</span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%  url 'users:logout' %}">Logout
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:register' %}">Register
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'users:login' %}">Login
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <!--the most significant part of the page using the bootstrap container to group elements-->
+        <div class="pb-2 mb2 border-bottom">
+            <!--padding refers to spacing between an element and its container  margin is the space between an elements border and other elements on the page-->
+            {% block page_header %}
+            <!--page title -->
+            {% endblock page_header %}
+        </div>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+</body>
+
+</html>

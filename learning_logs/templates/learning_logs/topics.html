@@ -1,0 +1,21 @@
+{% extends "learning_logs/base.html" %} 
+<!--inheriting from the base
+we are not loading bootstrap becuase we are not using any bootstrap templates-->
+
+{% block page_header %}
+<h1>Topics</h1>
+{% endblock page_header %}
+{% block content %} <!--opening a content block-->
+<ul>
+    {% for topic in topics %} <!--a for loop-->
+    <li><h3><a href="{% url 'learning_logs:topic' topic.id%}"> {{topic}}</a></h3></li> <!--use double braces to add a variable to a template-->
+    {% empty %}
+    <li><h3>No topics have been added yet</h3></li>
+    {% endfor %} <!--for loop ends here-->
+</ul>
+<h3><a href="{% url 'learning_logs:new_topic'%}">Add a new Topic</a></h3>
+{% endblock content %}<!--endding a content bloc
+
+   <a href="{% url 'learning_logs:topics'topic.id%</a>}">">k#
+        
+    -->
